@@ -1,17 +1,19 @@
 import java.util.*;
-class sum
+class avg
 {
     public static void main(String[] args) 
     {
         Scanner s =new Scanner(System.in);
-        int a,b,c;
-        System.out.println("Enter Three integers");
+        int a,b;
+        System.out.println("Enter Two integers");
         a=s.nextInt();
         b=s.nextInt();
-        c=s.nextInt();
-        int sum=a+b+c;
+       	int sum=a+b;
         System.out.println("The sum is"+sum);
+        float avg=sum/2;
+        System.out.println("The average is"+avg);
         s.close();
+        
 
     }
 
