@@ -11,7 +11,7 @@ class Sumofdigits {
             sum += s.nextInt();
         }
 
-        scanner.close();
+        s.close();
         System.out.println(sum);
     }
 }
