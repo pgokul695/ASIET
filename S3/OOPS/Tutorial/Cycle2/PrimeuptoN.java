@@ -33,11 +33,7 @@ class PrimeNumbers {
     public static void main(String args[]) 
     {
         int j=1,n,i=0,l;
-		l=args.length();
-        for(i=l;i>-1;i++)
-        {
-        	n=(Integer.ParseInt(args[i])*j);
-        	j*=10;
-        }
+	n=(Integer.parseInt(args[i])*j);
+        printPrimesUpto(n);
     }
 }
