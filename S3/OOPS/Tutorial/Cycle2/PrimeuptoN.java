@@ -1,4 +1,4 @@
-import java.util.Scanner;
+import java.util.*;
 
 class PrimeNumbers {
 
@@ -32,8 +32,13 @@ class PrimeNumbers {
 
     public static void main(String args[]) 
     {
-        int j=1,n,i=0,l;
-	n=(Integer.parseInt(args[i])*j);
-        printPrimesUpto(n);
+        if(args.length<1)
+	{
+		System.out.println("Enter an integer as an argument");
+		System.exit(0);
+	}
+	PrimeNumbers primeNumbers = new PrimeNumbers();
+	int n=(Integer.parseInt(args[0]));
+        primeNumbers.printPrimesUpTo(n);
     }
 }
