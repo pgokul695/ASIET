@@ -1,77 +1,72 @@
 #include <stdio.h>
 
-int main()
-{
-    int i, j, r, c, r1, c1, k = 0, n = 0, n2 = 0;
+void inputMatrix(int matrix[100][100], int *rows, int *cols);
+void convertToSparse(int matrix[100][100], int rows, int cols, int sparse[100][3], int *count);
+void addSparseMatrices(int T1[100][3], int n1, int T2[100][3], int n2, int R[100][3], int *nR);
+void printSparseMatrix(int sparse[100][3], int count);
+
+int main() {
     int a[100][100], b[100][100];
     int T1[100][3], T2[100][3], R[100][3];
+    int r, c, r1, c1;
+    int n1 = 0, n2 = 0, nR = 0;
 
-    printf("Enter the number of rows of the First matrix: ");
-    scanf("%d", &r);
-    printf("Enter the number of columns of the First matrix: ");
-    scanf("%d", &c);
-    printf("Enter the number of rows of the second matrix: ");
-    scanf("%d", &r1);
-    printf("Enter the number of columns of the second matrix: ");
-    scanf("%d", &c1);
+    printf("Enter the number of rows and columns of the First matrix:\n");
+    inputMatrix(a, &r, &c);
+    printf("Enter the number of rows and columns of the Second matrix:\n");
+    inputMatrix(b, &r1, &c1);
 
     if (r != r1 || c != c1) {
         printf("Error: Matrices must be of the same dimensions for addition.\n");
         return 1;
     }
 
-    printf("Enter the First matrix elements:\n");
-    for (i = 0; i < r; i++) {
-        for (j = 0; j < c; j++) {
-            scanf("%d", &a[i][j]);
+    convertToSparse(a, r, c, T1, &n1);
+    convertToSparse(b, r1, c1, T2, &n2);
+
+    addSparseMatrices(T1, n1, T2, n2, R, &nR);
+
+    printf("The Sparse matrix representation of the Resultant matrix is:\n");
+    printf("Row\tColumn\tValue\n");
+    printSparseMatrix(R, nR);
+
+    return 0;
+}
+
+void inputMatrix(int matrix[100][100], int *rows, int *cols) {
+    scanf("%d %d", rows, cols);
+    printf("Enter the matrix elements:\n");
+    for (int i = 0; i < *rows; i++) {
+        for (int j = 0; j < *cols; j++) {
+            scanf("%d", &matrix[i][j]);
         }
     }
+}
 
-    printf("Enter the second matrix elements:\n");
-    for (i = 0; i < r1; i++) {
-        for (j = 0; j < c1; j++) {
-            scanf("%d", &b[i][j]);
-        }
-    }
-
-    k = 1;
-    for (i = 0; i < r; i++) {
-        for (j = 0; j < c; j++) {
-            if (a[i][j] != 0) {
-                T1[k][0] = i;
-                T1[k][1] = j;
-                T1[k][2] = a[i][j];
+void convertToSparse(int matrix[100][100], int rows, int cols, int sparse[100][3], int *count) {
+    int k = 1;
+    *count = 0;
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            if (matrix[i][j] != 0) {
+                sparse[k][0] = i;
+                sparse[k][1] = j;
+                sparse[k][2] = matrix[i][j];
                 k++;
-                n++;
+                (*count)++;
             }
         }
     }
+    sparse[0][0] = rows;
+    sparse[0][1] = cols;
+    sparse[0][2] = *count;
+}
+
+void addSparseMatrices(int T1[100][3], int n1, int T2[100][3], int n2, int R[100][3], int *nR) {
+    int k = 1, p1 = 1, p2 = 1;
+    *nR = 0;
     
-    T1[0][0] = r;
-    T1[0][1] = c;
-    T1[0][2] = n;
-
-    k = 1;
-    for (i = 0; i < r1; i++) {
-        for (j = 0; j < c1; j++) {
-            if (b[i][j] != 0) {
-                T2[k][0] = i;
-                T2[k][1] = j;
-                T2[k][2] = b[i][j];
-                k++;
-                n2++;
-            }
-        }
-    }
-    T2[0][0] = r1;
-    T2[0][1] = c1;
-    T2[0][2] = n2;
-
-    
-    k = 0;
-    int p1 = 1, p2 = 1;
-
-    while (p1 <= n && p2 <= n2) {
+    while (p1 <= n1 && p2 <= n2) {
         if (T1[p1][0] == T2[p2][0] && T1[p1][1] == T2[p2][1]) {
             R[k][0] = T1[p1][0];
             R[k][1] = T1[p1][1];
@@ -92,8 +87,7 @@ int main()
         k++;
     }
 
-
-    while (p1 <= n) {
+    while (p1 <= n1) {
         R[k][0] = T1[p1][0];
         R[k][1] = T1[p1][1];
         R[k][2] = T1[p1][2];
@@ -109,11 +103,15 @@ int main()
         k++;
     }
 
-    printf("The Sparse matrix representation of the Resultant matrix is:\n");
-    printf("Row\tColumn\tValue\n");
-    for (i = 0; i < k; i++) {
-        printf("%d\t%d\t%d\n", R[i][0], R[i][1], R[i][2]);
-    }
+    R[0][0] = T1[0][0];
+    R[0][1] = T1[0][1];
+    R[0][2] = k - 1;
 
-    return 0;
+    *nR = k;
+}
+
+void printSparseMatrix(int sparse[100][3], int count) {
+    for (int i = 0; i < count; i++) {
+        printf("%d\t%d\t%d\n", sparse[i][0], sparse[i][1], sparse[i][2]);
+    }
 }
