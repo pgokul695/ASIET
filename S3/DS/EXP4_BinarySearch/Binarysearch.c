@@ -1,7 +1,7 @@
 #include<stdio.h>
 void sort(int arr[],int n)
 {
-	int i,j,b,temp;
+	int i,j,b=0,temp;
 	for(i=0;i<n-1;i++)	
 	{
 		b=0;
@@ -29,7 +29,7 @@ void search(int arr[],int n,int s)
 		if(arr[me]==s)
 		{
 			printf("The element is found at %d",me);
-			b==1;
+			b=1;
 			break;
 		}
 		else if(arr[me]>s)
@@ -38,7 +38,9 @@ void search(int arr[],int n,int s)
 			fe=me+1;		
 	}
 		if (b==0)
+		{
 			printf("The element is not found in the array");
+		}
 		
 }
 		
