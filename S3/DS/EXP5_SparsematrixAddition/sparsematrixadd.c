@@ -105,7 +105,7 @@ void addSparseMatrices(int T1[100][3], int n1, int T2[100][3], int n2, int R[100
 
     R[0][0] = T1[0][0];
     R[0][1] = T1[0][1];
-    R[0][2] = k - 1;
+    R[0][2] = (k - 1);
 
     *nR = k;
 }
