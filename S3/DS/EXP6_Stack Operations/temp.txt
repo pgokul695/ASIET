@@ -4,12 +4,12 @@
 typedef struct {
     int top;
     int size;
-    int items[100];  // Fixed size array for stack
+    int items[100];  
 } Stack;
 
 void initialize(Stack *s, int maxSize) {
     s->top = -1;
-    s->size = maxSize < 100 ? maxSize : 100;  // Ensure size does not exceed 100
+    s->size = maxSize < 100 ? maxSize : 100;  
 }
 
 int isFull(Stack *s) {
