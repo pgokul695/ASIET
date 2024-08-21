@@ -111,7 +111,7 @@ void addSparseMatrices(int T1[100][3], int n1, int T2[100][3], int n2, int R[100
 }
 
 void printSparseMatrix(int sparse[100][3], int count) {
-    for (int i = 0; i <= count; i++) {
+    for (int i = 0; i < count; i++) {
         printf("%d\t%d\t%d\n", sparse[i][0], sparse[i][1], sparse[i][2]);
     }
 }
