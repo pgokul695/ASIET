@@ -2,7 +2,7 @@ import java.util.*;
 class Excep{
 	public static void main(String[] args){
 		Scanner s=new Scanner(System.in);
-		System.out.println("[1]Try&Catch Block\n[2]Throw Error\n[3]Finalize");
+		System.out.println("[1]Try&Catch Block\n[2]Throw Error\n[3]Finally");
 		int opt=s.nextInt();
 		if(opt==1){
 			int[] num={1,2,3};
