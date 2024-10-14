@@ -1,0 +1,11 @@
+1 Apples Fruit 1.20 100
+2 Bananas Fruit 0.50 150
+3 Carrots Vegetable 0.80 200
+4 Milk Dairy 1.50 50
+5 Bread Bakery 1.00 75
+6 Eggs Dairy 2.00 60
+7 Chicken Meat 5.00 30
+8 Rice Grain 2.50 25
+9 Tomatoes Vegetable 1.10 120
+10 Cheese Dairy 3.00 40
+
