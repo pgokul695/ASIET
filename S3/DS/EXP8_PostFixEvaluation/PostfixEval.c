@@ -114,7 +114,7 @@ double evaluate(char postfix[100]) {
             else if (postfix[i] == '-') r = p1 - p2;
             else if (postfix[i] == '*') r = p1 * p2;
             else if (postfix[i] == '/') r = p1 / p2;
-            else if (postfix[i] == '^') r = p1*p2;
+            else if (postfix[i] == '^') r = pow(p1,p2);
             push(&s, r);
         }
         i++;
