@@ -125,12 +125,30 @@ double evaluate(char postfix[100]) {
 int main() {
     char infix[100], postfix[100];
     double result;
-    printf("Enter the Infix Expression: ");
-    scanf("%s", infix);
-    convert(infix, postfix);
-    printf("The Postfix Expression is: %s\n", postfix);
-    result = evaluate(postfix);
-    printf("The result is %lf\n", result);
+    int choice;
+    while(1)
+    { 
+    printf("PostFix Evaluator\n 1.Enter an INFIX Expression \n 2.Enter a Postfix Expression \n 3.Exit");
+    scanf("%d",&choice);
+    switch(choice)
+    {
+    	case 1:{
+    	printf("Enter the Infix Expression: ");
+    	scanf("%s", infix);
+    	convert(infix, postfix);
+    	printf("The Postfix Expression is: %s\n", postfix);
+    	result = evaluate(postfix);
+    	printf("The result is %lf\n", result);
+    	}
+    	case 2:{
+    	printf("Enter the postfix Expression: ");
+    	scanf("%s", postfix);
+    	result = evaluate(postfix);
+    	printf("The result is %lf\n", result);
+    	}
+    	case 3:
+    		return 0;
+    }
     return 0;
 }
-
+}
