@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <string.h>
-#include <ctype.h>
 
 typedef struct stack {
     char items[100];
@@ -12,6 +11,7 @@ int operator(char a) {
     if (a == '^') return 3;
     if (a == '*' || a == '/') return 2;
     if (a == '+' || a == '-') return 1;
+    if(a=='('||a==')')return -1;
     return 0;
 }
 
@@ -54,7 +54,7 @@ void convert(char infix[100], char postfix[100]) {
     s.top = -1;
 
     while (infix[i]) {
-        if (isalnum(infix[i])) {
+        if (operator(infix[i])==0) {
             postfix[j++] = infix[i];
         } else if (infix[i] == '(') {
             push(&s, infix[i]);
@@ -76,6 +76,11 @@ void convert(char infix[100], char postfix[100]) {
         postfix[j++] = pop(&s);
     }
     postfix[j] = '\0';
+    
+    while (!isEmpty(&s)) {
+        postfix[j++] = pop(&s);
+    }
+    postfix[j] = '\0';
 }
 
 int main() {
@@ -86,4 +91,3 @@ int main() {
     printf("The Postfix Expression is: %s\n", postfix);
     return 0;
 }
-
