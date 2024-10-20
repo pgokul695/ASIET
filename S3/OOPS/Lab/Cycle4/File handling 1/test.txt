@@ -1,0 +1,1 @@
+It demonstrates file handling in Java with reader/writer
