@@ -27,7 +27,6 @@ class AccountHolder extends Thread {
         this.account = account;
     }
 
-    @Override
     public void run() {
         for (int i = 0; i < 3; i++) {
             account.deposit(100);
