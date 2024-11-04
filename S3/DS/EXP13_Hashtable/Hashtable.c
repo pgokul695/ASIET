@@ -98,7 +98,9 @@ void displayMenu() {
     printf("1. Insert Element\n");
     printf("2. Remove Element\n");
     printf("3. Search\n");
-    printf("4. Exit\n");
+    printf("4. Display\n");
+    printf("5. Exit\n");
+    
 }
 
 int main() {
@@ -115,20 +117,20 @@ int main() {
 
         switch (choice) {
         case 1:
-            printf("Enter The key");
+            printf("Enter The key: ");
             scanf("%d", &key);
-            printf("Enter The element to be inserted");
+            printf("Enter The element to be inserted: ");
             scanf("%d", &data);
             insert(key, data);
             break;
         case 2:
-            printf("Enter the Key to be deletd");
+            printf("Enter the Key to be deletd: ");
             scanf("%d",&key);
             item=search(key);
             delete(item);
             break;
         case 3:
-            printf("Enter the Key to be searched");
+            printf("Enter the Key to be searched: ");
             scanf("%d",&key);
             item=search(key);
             if(item != NULL) {
@@ -138,6 +140,9 @@ int main() {
    	    }
             break;
         case 4:
+            display();
+            break;
+        case 5:
             exit(0);
         default:
             printf("Invalid choice, please try again.\n");
