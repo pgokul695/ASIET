@@ -1,0 +1,474 @@
+create table players(id int primary key, name char(50) not null, team char(15) not null, centuries int, 50s int);
+desc players
+alter table players add isbowler boolean
+alter table players add iscaptain boolean unique
+insert into players values(1,'abc','team1',10,20,0,0);
+select* from players;
+insert into players values(2,'efg','team1',10,20,1,1);
+insert into players values(3,'xyz','team1',10,20,1,1);
+insert into players values(3,'xyz','team1',10,20,1,2);
+select* from players;
+update players set iscaptain=0 where id=3;
+insert into players values(4,'mkl','team2',10,20,1,NULL);
+desc players;
+select name from players where id=4;
+
+
+
+Temp
+mysql -u root -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.40-0ubuntu0.22.04.1 (Ubuntu)
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> create table studentdb(stu_id number(3), stu_name char(35), stu_addr varchar(15));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'number(3), stu_name char(35), stu_addr varchar(15))' at line 1
+mysql> create table studentdb(stu_id int, stu_name char(35), stu_addr varchar(15));
+ERROR 1046 (3D000): No database selected
+mysql> select
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> create database gokul
+    -> ;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> database gokul;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'database gokul' at line 1
+mysql> select gokul;
+ERROR 1054 (42S22): Unknown column 'gokul' in 'field list'
+mysql> gokul
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'gokul' at line 1
+mysql> use gokul
+Database changed
+mysql> create table studentdb(stu_id int, stu_name char(35), stu_addr varchar(15));
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> desc studentdb
+    -> ;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| stu_id   | int         | YES  |     | NULL    |       |
+| stu_name | char(35)    | YES  |     | NULL    |       |
+| stu_addr | varchar(15) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> create table studentdb(stu_id int Primary key, stu_name char(35) not null , stu_addr varchar(15));
+ERROR 1050 (42S01): Table 'studentdb' already exists
+mysql> create table studentdb1(stu_id int Primary key, stu_name char(35) not null , stu_addr varchar(15));
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> desc studentdb1;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| stu_id   | int         | NO   | PRI | NULL    |       |
+| stu_name | char(35)    | NO   |     | NULL    |       |
+| stu_addr | varchar(15) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> Insert into studendb1 values(1,'gokul','kalady');
+ERROR 1146 (42S02): Table 'gokul.studendb1' doesn't exist
+mysql> Insert into studentdb1 values(1,'gokul','kalady');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> Insert into studentdb1 values(1,'gokul','kalady');
+ERROR 1062 (23000): Duplicate entry '1' for key 'studentdb1.PRIMARY'
+mysql> Insert into studentdb values(1,'gokul','kalady');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> Insert into studentdb values(1,'gokul','kalady');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> Insert into studentdb values(1,'gokul','kalady');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from studentdb1
+    -> ;
++--------+----------+----------+
+| stu_id | stu_name | stu_addr |
++--------+----------+----------+
+|      1 | gokul    | kalady   |
++--------+----------+----------+
+1 row in set (0.00 sec)
+
+mysql> select * from studentdb;
++--------+----------+----------+
+| stu_id | stu_name | stu_addr |
++--------+----------+----------+
+|      1 | gokul    | kalady   |
+|      1 | gokul    | kalady   |
+|      1 | gokul    | kalady   |
++--------+----------+----------+
+3 rows in set (0.00 sec)
+
+mysql> Insert into studentdb1 values(1,,'kalady');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ','kalady')' at line 1
+mysql> Insert into studentdb1 values(2,,'kalady');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ','kalady')' at line 1
+mysql> Insert into studentdb1 values(2,Null,'kalady');
+ERROR 1048 (23000): Column 'stu_name' cannot be null
+mysql> alter table studendb add stu_phno;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> alter table studendb add stu_phno int;
+ERROR 1146 (42S02): Table 'gokul.studendb' doesn't exist
+mysql> alter table studentdb add stu_phno int;
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc studentdb
+    -> ;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| stu_id   | int         | YES  |     | NULL    |       |
+| stu_name | char(35)    | YES  |     | NULL    |       |
+| stu_addr | varchar(15) | YES  |     | NULL    |       |
+| stu_phno | int         | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> update studentdb Where stu_id=101 stu_phno 90909090
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Where stu_id=101 stu_phno 90909090' at line 1
+mysql> update studentdb set stu_phno=9090990 Where stu_id=101;
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> select * from studentdb;
++--------+----------+----------+----------+
+| stu_id | stu_name | stu_addr | stu_phno |
++--------+----------+----------+----------+
+|      1 | gokul    | kalady   |     NULL |
+|      1 | gokul    | kalady   |     NULL |
+|      1 | gokul    | kalady   |     NULL |
++--------+----------+----------+----------+
+3 rows in set (0.00 sec)
+
+mysql> update studentdb set stu_phno=9090990 Where stu_id=101;
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> update studentdb set stu_phno=9090990 Where stu_id=1;
+Query OK, 3 rows affected (0.03 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> desc studentdb
+    -> ;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| stu_id   | int         | YES  |     | NULL    |       |
+| stu_name | char(35)    | YES  |     | NULL    |       |
+| stu_addr | varchar(15) | YES  |     | NULL    |       |
+| stu_phno | int         | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from studentdb;
++--------+----------+----------+----------+
+| stu_id | stu_name | stu_addr | stu_phno |
++--------+----------+----------+----------+
+|      1 | gokul    | kalady   |  9090990 |
+|      1 | gokul    | kalady   |  9090990 |
+|      1 | gokul    | kalady   |  9090990 |
++--------+----------+----------+----------+
+3 rows in set (0.00 sec)
+
+mysql> update studentdb set stu_phno=1234567890 Where stu_id=1;
+Query OK, 3 rows affected (0.00 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> select * from studentdb;
++--------+----------+----------+------------+
+| stu_id | stu_name | stu_addr | stu_phno   |
++--------+----------+----------+------------+
+|      1 | gokul    | kalady   | 1234567890 |
+|      1 | gokul    | kalady   | 1234567890 |
+|      1 | gokul    | kalady   | 1234567890 |
++--------+----------+----------+------------+
+3 rows in set (0.00 sec)
+
+mysql> Insert into studentdb1 values(2,'hai','kalady');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> Insert into studentdb1 values(3,'hello','kalady');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> alter table studentdb1 add stu_phno int;
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> update studentdb1 set stu_phno=1234567890 Where stu_id=1;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from studentdb1;
++--------+----------+----------+------------+
+| stu_id | stu_name | stu_addr | stu_phno   |
++--------+----------+----------+------------+
+|      1 | gokul    | kalady   | 1234567890 |
+|      2 | hai      | kalady   |       NULL |
+|      3 | hello    | kalady   |       NULL |
++--------+----------+----------+------------+
+3 rows in set (0.00 sec)
+
+mysql> alter table studentdb1 add stu_mail char(40);
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc studentdb1
+    -> ;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| stu_id   | int         | NO   | PRI | NULL    |       |
+| stu_name | char(35)    | NO   |     | NULL    |       |
+| stu_addr | varchar(15) | YES  |     | NULL    |       |
+| stu_phno | int         | YES  |     | NULL    |       |
+| stu_mail | char(40)    | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> update studentdb1 set stu_mail='example@domain.com Where stu_id=1;
+    '> ;
+    '> ;
+    '> ;
+    '> ,;
+    '> 'l
+    -> ';
+    '> ' where stu_id=1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'l
+';
+' where stu_id=1' at line 6
+mysql> update studentdb1 set stu_mail='example@domain.com' Where stu_id=1;
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from studentdb1;
++--------+----------+----------+------------+--------------------+
+| stu_id | stu_name | stu_addr | stu_phno   | stu_mail           |
++--------+----------+----------+------------+--------------------+
+|      1 | gokul    | kalady   | 1234567890 | example@domain.com |
+|      2 | hai      | kalady   |       NULL | NULL               |
+|      3 | hello    | kalady   |       NULL | NULL               |
++--------+----------+----------+------------+--------------------+
+3 rows in set (0.00 sec)
+
+mysql> create table players(id int primarykey, name char(50) not null, team char(15) not null, centuries int, 50s int, isbowler boolean, iscaptian boolean Unique)
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'primarykey, name char(50) not null, team char(15) not null, centuries int, 50s i' at line 1
+mysql> create table players(id int primarykey, name char(50) not null, team char(15) not null, centuries int, 50s int);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'primarykey, name char(50) not null, team char(15) not null, centuries int, 50s i' at line 1
+mysql> create table players(id int primary key, name char(50) not null, team char(15) not null, centuries int, 50s int);
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> desc players
+    -> ;
++-----------+----------+------+-----+---------+-------+
+| Field     | Type     | Null | Key | Default | Extra |
++-----------+----------+------+-----+---------+-------+
+| id        | int      | NO   | PRI | NULL    |       |
+| name      | char(50) | NO   |     | NULL    |       |
+| team      | char(15) | NO   |     | NULL    |       |
+| centuries | int      | YES  |     | NULL    |       |
+| 50s       | int      | YES  |     | NULL    |       |
++-----------+----------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> alter table players add isbowler boolean
+    -> ;
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc players
+    -> ;
++-----------+------------+------+-----+---------+-------+
+| Field     | Type       | Null | Key | Default | Extra |
++-----------+------------+------+-----+---------+-------+
+| id        | int        | NO   | PRI | NULL    |       |
+| name      | char(50)   | NO   |     | NULL    |       |
+| team      | char(15)   | NO   |     | NULL    |       |
+| centuries | int        | YES  |     | NULL    |       |
+| 50s       | int        | YES  |     | NULL    |       |
+| isbowler  | tinyint(1) | YES  |     | NULL    |       |
++-----------+------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> alter table players add iscaptain boolean unique
+    -> ;
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc players
+    -> ;
++-----------+------------+------+-----+---------+-------+
+| Field     | Type       | Null | Key | Default | Extra |
++-----------+------------+------+-----+---------+-------+
+| id        | int        | NO   | PRI | NULL    |       |
+| name      | char(50)   | NO   |     | NULL    |       |
+| team      | char(15)   | NO   |     | NULL    |       |
+| centuries | int        | YES  |     | NULL    |       |
+| 50s       | int        | YES  |     | NULL    |       |
+| isbowler  | tinyint(1) | YES  |     | NULL    |       |
+| iscaptain | tinyint(1) | YES  | UNI | NULL    |       |
++-----------+------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> insert into players(1,'abc','team1','10','20','0','0');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1,'abc','team1','10','20','0','0')' at line 1
+mysql> insert into players(1,'abc','team1','10','20',0,0);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1,'abc','team1','10','20',0,0)' at line 1
+mysql> insert into players(1,'abc','team1',10,20,0,0);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1,'abc','team1',10,20,0,0)' at line 1
+mysql> insert into players values(1,'abc','team1',10,20,0,0);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> select* from players
+    -> ;
++----+------+-------+-----------+------+----------+-----------+
+| id | name | team  | centuries | 50s  | isbowler | iscaptain |
++----+------+-------+-----------+------+----------+-----------+
+|  1 | abc  | team1 |        10 |   20 |        0 |         0 |
++----+------+-------+-----------+------+----------+-----------+
+1 row in set (0.00 sec)
+
+mysql> insert into players values(2,'efg','team1',10,20,1,1);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into players values(3,'xyz','team1',10,20,1,1);
+ERROR 1062 (23000): Duplicate entry '1' for key 'players.iscaptain'
+mysql> insert into players values(3,'xyz','team1',10,20,1,2);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select* from players
+    -> ;
++----+------+-------+-----------+------+----------+-----------+
+| id | name | team  | centuries | 50s  | isbowler | iscaptain |
++----+------+-------+-----------+------+----------+-----------+
+|  1 | abc  | team1 |        10 |   20 |        0 |         0 |
+|  2 | efg  | team1 |        10 |   20 |        1 |         1 |
+|  3 | xyz  | team1 |        10 |   20 |        1 |         2 |
++----+------+-------+-----------+------+----------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> update players set 50s=40 where id=1;
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select* from players;
++----+------+-------+-----------+------+----------+-----------+
+| id | name | team  | centuries | 50s  | isbowler | iscaptain |
++----+------+-------+-----------+------+----------+-----------+
+|  1 | abc  | team1 |        10 |   40 |        0 |         0 |
+|  2 | efg  | team1 |        10 |   20 |        1 |         1 |
+|  3 | xyz  | team1 |        10 |   20 |        1 |         2 |
++----+------+-------+-----------+------+----------+-----------+
+3 rows in set (0.01 sec)
+
+mysql> update players set iscaptain=0 where id=3;
+ERROR 1062 (23000): Duplicate entry '0' for key 'players.iscaptain'
+mysql> update players set iscaptain=NULL where id=3;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select* from players;
++----+------+-------+-----------+------+----------+-----------+
+| id | name | team  | centuries | 50s  | isbowler | iscaptain |
++----+------+-------+-----------+------+----------+-----------+
+|  1 | abc  | team1 |        10 |   40 |        0 |         0 |
+|  2 | efg  | team1 |        10 |   20 |        1 |         1 |
+|  3 | xyz  | team1 |        10 |   20 |        1 |      NULL |
++----+------+-------+-----------+------+----------+-----------+
+3 rows in set (0.01 sec)
+
+mysql> insert into players values(4,'mkl','team2',10,20,1,NULL);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select* from players;
++----+------+-------+-----------+------+----------+-----------+
+| id | name | team  | centuries | 50s  | isbowler | iscaptain |
++----+------+-------+-----------+------+----------+-----------+
+|  1 | abc  | team1 |        10 |   40 |        0 |         0 |
+|  2 | efg  | team1 |        10 |   20 |        1 |         1 |
+|  3 | xyz  | team1 |        10 |   20 |        1 |      NULL |
+|  4 | mkl  | team2 |        10 |   20 |        1 |      NULL |
++----+------+-------+-----------+------+----------+-----------+
+4 rows in set (0.00 sec)
+
+mysql> desc players
+    -> ;
++-----------+------------+------+-----+---------+-------+
+| Field     | Type       | Null | Key | Default | Extra |
++-----------+------------+------+-----+---------+-------+
+| id        | int        | NO   | PRI | NULL    |       |
+| name      | char(50)   | NO   |     | NULL    |       |
+| team      | char(15)   | NO   |     | NULL    |       |
+| centuries | int        | YES  |     | NULL    |       |
+| 50s       | int        | YES  |     | NULL    |       |
+| isbowler  | tinyint(1) | YES  |     | NULL    |       |
+| iscaptain | tinyint(1) | YES  | UNI | NULL    |       |
++-----------+------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> select name from players where id=4
+    -> ;
++------+
+| name |
++------+
+| mkl  |
++------+
+1 row in set (0.00 sec)
+
+mysql> select name from players where id>1
+    -> ;
++------+
+| name |
++------+
+| efg  |
+| xyz  |
+| mkl  |
++------+
+3 rows in set (0.00 sec)
+
+mysql> select name from players where id>0;
++------+
+| name |
++------+
+| abc  |
+| efg  |
+| xyz  |
+| mkl  |
++------+
+4 rows in set (0.00 sec)
+
+mysql> select name from players where id!=0;
++------+
+| name |
++------+
+| abc  |
+| efg  |
+| xyz  |
+| mkl  |
++------+
+4 rows in set (0.00 sec)
+
+mysql> ^C
+mysql> ^C
+mysql> 
+
+
+
+
