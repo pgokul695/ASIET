@@ -1,0 +1,137 @@
+student@dl-30:~/Gokulp_30/OS/Exp_4_Systemcalls .bak$ ls
+a.out  syscall.c
+student@dl-30:~/Gokulp_30/OS/Exp_4_Systemcalls .bak$ cd ~
+student@dl-30:~$ date
+Thursday 09 January 2025 05:07:37 PM IST
+student@dl-30:~$ date +%m
+01
+student@dl-30:~$ date +%h
+Jan
+student@dl-30:~$ date +%d
+09
+student@dl-30:~$ cal
+    January 2025      
+Su Mo Tu We Th Fr Sa  
+          1  2  3  4  
+ 5  6  7  8  9 10 11  
+12 13 14 15 16 17 18  
+19 20 21 22 23 24 25  
+26 27 28 29 30 31     
+                      
+student@dl-30:~$ cal 2
+                             2
+      January               February               March          
+Su Mo Tu We Th Fr Sa  Su Mo Tu We Th Fr Sa  Su Mo Tu We Th Fr Sa  
+ 1  2  3  4  5  6  7            1  2  3  4            1  2  3  4  
+ 8  9 10 11 12 13 14   5  6  7  8  9 10 11   5  6  7  8  9 10 11  
+15 16 17 18 19 20 21  12 13 14 15 16 17 18  12 13 14 15 16 17 18  
+22 23 24 25 26 27 28  19 20 21 22 23 24 25  19 20 21 22 23 24 25  
+29 30 31              26 27 28              26 27 28 29 30 31     
+                                                                  
+
+       April                  May                   June          
+Su Mo Tu We Th Fr Sa  Su Mo Tu We Th Fr Sa  Su Mo Tu We Th Fr Sa  
+                   1      1  2  3  4  5  6               1  2  3  
+ 2  3  4  5  6  7  8   7  8  9 10 11 12 13   4  5  6  7  8  9 10  
+ 9 10 11 12 13 14 15  14 15 16 17 18 19 20  11 12 13 14 15 16 17  
+16 17 18 19 20 21 22  21 22 23 24 25 26 27  18 19 20 21 22 23 24  
+23 24 25 26 27 28 29  28 29 30 31           25 26 27 28 29 30     
+30                                                                
+
+        July                 August              September        
+Su Mo Tu We Th Fr Sa  Su Mo Tu We Th Fr Sa  Su Mo Tu We Th Fr Sa  
+                   1         1  2  3  4  5                  1  2  
+ 2  3  4  5  6  7  8   6  7  8  9 10 11 12   3  4  5  6  7  8  9  
+ 9 10 11 12 13 14 15  13 14 15 16 17 18 19  10 11 12 13 14 15 16  
+16 17 18 19 20 21 22  20 21 22 23 24 25 26  17 18 19 20 21 22 23  
+23 24 25 26 27 28 29  27 28 29 30 31        24 25 26 27 28 29 30  
+30 31                                                             
+
+      October               November              December        
+Su Mo Tu We Th Fr Sa  Su Mo Tu We Th Fr Sa  Su Mo Tu We Th Fr Sa  
+ 1  2  3  4  5  6  7            1  2  3  4                  1  2  
+ 8  9 10 11 12 13 14   5  6  7  8  9 10 11   3  4  5  6  7  8  9  
+15 16 17 18 19 20 21  12 13 14 15 16 17 18  10 11 12 13 14 15 16  
+22 23 24 25 26 27 28  19 20 21 22 23 24 25  17 18 19 20 21 22 23  
+29 30 31              26 27 28 29 30        24 25 26 27 28 29 30  
+                                            31                    
+student@dl-30:~$ echo hai
+hai
+student@dl-30:~$ ls
+Desktop    google-chrome-stable_current_amd64.deb  Public
+Documents  Music                                   snap
+Downloads  mysql-apt-config_0.8.30-1_all.deb       Templates
+Gokulp_30  Pictures                                Videos
+student@dl-30:~$ ls -l
+total 108836
+drwxr-xr-x 2 student student      4096 Oct 30 11:46 Desktop
+drwxr-xr-x 2 student student      4096 Oct 30 21:51 Documents
+drwxr-xr-x 2 student student      4096 Jan  9 15:23 Downloads
+drwxrwxr-x 4 student student      4096 Jan  9 15:23 Gokulp_30
+-rw-r--r-- 1 root    root    111384404 Oct 29 06:24 google-chrome-stable_current_amd64.deb
+drwxr-xr-x 2 student student      4096 Oct 30 21:51 Music
+-rw-r--r-- 1 root    root        18200 Apr 23  2024 mysql-apt-config_0.8.30-1_all.deb
+drwxr-xr-x 3 student student      4096 Nov  5 14:39 Pictures
+drwxr-xr-x 2 student student      4096 Oct 30 21:51 Public
+drwx------ 7 student student      4096 Jan  4 16:34 snap
+drwxr-xr-x 2 student student      4096 Oct 30 21:51 Templates
+drwxr-xr-x 2 student student      4096 Oct 30 21:51 Videos
+student@dl-30:~$ ls-s
+Command 'ls-s' not found, did you mean:
+  command 'lsns' from deb util-linux (2.37.2-4ubuntu3.4)
+Try: sudo apt install <deb name>
+student@dl-30:~$ ls -s
+total 108836
+     4 Desktop
+     4 Documents
+     4 Downloads
+     4 Gokulp_30
+108776 google-chrome-stable_current_amd64.deb
+     4 Music
+    20 mysql-apt-config_0.8.30-1_all.deb
+     4 Pictures
+     4 Public
+     4 snap
+     4 Templates
+     4 Videos
+student@dl-30:~$ man ls
+student@dl-30:~$ who 
+student  tty2         2025-01-09 15:20 (tty2)
+student@dl-30:~$ whoami
+student
+student@dl-30:~$ uptime
+ 17:08:46 up  1:48,  1 user,  load average: 18729.29, 18348.79, 13388.67
+student@dl-30:~$ uname
+Linux
+student@dl-30:~$ hostname
+dl-30
+student@dl-30:~$ bc
+bc 1.07.1
+Copyright 1991-1994, 1997, 1998, 2000, 2004, 2006, 2008, 2012-2017 Free Software Foundation, Inc.
+This is free software with ABSOLUTELY NO WARRANTY.
+For details type `warranty'. 
+^Z
+[1]+  Stopped                 bc
+student@dl-30:~$ ls
+Desktop    google-chrome-stable_current_amd64.deb  Public
+Documents  Music                                   snap
+Downloads  mysql-apt-config_0.8.30-1_all.deb       Templates
+Gokulp_30  Pictures                                Videos
+student@dl-30:~$ touch temp.txt
+student@dl-30:~$ rm temp.txt
+student@dl-30:~$ touch temp.txt
+student@dl-30:~$ chmod +x temp.txt
+student@dl-30:~$ tail temp.txt
+student@dl-30:~$ head.txt
+head.txt: command not found
+student@dl-30:~$ head temp.txt
+student@dl-30:~$ cp temp.txt /
+cp: cannot create regular file '/temp.txt': Permission denied
+student@dl-30:~$ cp temp.txt ~
+cp: 'temp.txt' and '/home/student/temp.txt' are the same file
+student@dl-30:~$ mv temp.txt temp2.txt
+student@dl-30:~$ ls
+Desktop    google-chrome-stable_current_amd64.deb  Public     Videos
+Documents  Music                                   snap
+Downloads  mysql-apt-config_0.8.30-1_all.deb       temp2.txt
+Gokulp_30  Pictures  
