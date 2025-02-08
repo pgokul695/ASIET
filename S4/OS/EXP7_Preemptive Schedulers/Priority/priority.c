@@ -1,5 +1,7 @@
-#include<stdio.h>
-#include<string.h>
+#include <stdio.h>
+#include <string.h>
+
+char idle[5] = "IDLE";
 
 typedef struct process {
     int pid;
@@ -9,6 +11,8 @@ typedef struct process {
     int ct;
     int tt;
     int wt;
+    int rt;
+    int p;
 } fcfs;
 
 void getprocess(fcfs p[100], int n) {
@@ -22,7 +26,10 @@ void getprocess(fcfs p[100], int n) {
         scanf("%d", &p[i].at);
         printf("Enter the %d Process Burst time: ", i + 1);
         scanf("%d", &p[i].bt);
-        p[i].ct = 0; 
+        printf("Enter the %d Priority: ", i + 1);
+        scanf("%d", &p[i].p);
+        p[i].ct = 0;
+        p[i].rt = p[i].bt;
     }
 }
 
@@ -40,30 +47,34 @@ void wt(fcfs p[100], int n) {
     }
 }
 
-void complete(fcfs p[100], int n, fcfs c[100]) {
-    int i, t = 0, comp = 0, min_bt, ind;
+int complete(fcfs p[100], int n, fcfs c[100]) {
+    int i, t = 0, comp = 0, max_p, ind;
 
     while (comp < n) {
-        max_p = 0;//set to maximum value 1*10^9 OR can use 99999 
+        max_p = -1;
         ind = -1;
 
-        for (i = 0; i < n; i++) {//to find the shortest job available
-            if ((p[i].at <= t) && (p[i].ct == 0) && (p[i].p < min_bt)) {
-                min_bt = p[i].bt;
+        for (i = 0; i < n; i++) {
+            if ((p[i].at <= t) && (p[i].rt != 0) && (p[i].p > max_p)) {
+                max_p = p[i].p;
                 ind = i;
             }
         }
 
-        if (ind != -1) { //to mark the job as completed and add the ct to the job
-            t += p[ind].bt;
-            p[ind].ct = t;
-            c[comp]=p[ind];
-            comp++;
-            
-        } else { //if no job found that is incomplete at time t increment t by one
+        if (ind != -1) {
+            c[t] = p[ind];
+            p[ind].rt--;
+            t++;
+            if (p[ind].rt == 0) {
+                p[ind].ct = t;
+                comp++;
+            }
+        } else {
+            strcpy(c[t].pname, idle);
             t++;
         }
     }
+    return t;
 }
 
 void print(fcfs p[100], int n) {
@@ -74,52 +85,50 @@ void print(fcfs p[100], int n) {
     }
 }
 
-void gantt(fcfs p[100], int n) {
-    int i, t = 0;
+void gantt(fcfs c[100], int t) {
+    int i;
     printf("\nGantt Chart:\n");
-
-    for (i = 0; i < n; i++) {
-        if (t < p[i].at) {
-            printf("| IDLE ");
-            t = p[i].at;
+    printf("| %s ", c[0].pname);
+    for (i = 1; i < t; i++) {
+        if (c[i].pid != c[i - 1].pid || strcmp(c[i].pname, "IDLE") == 0) {
+            printf("| %s ", c[i].pname);
         }
-        printf("| %s ", p[i].pname);
-        t += p[i].bt;
     }
     printf("|\n");
 
     printf("0");
-    t = 0;
-    for (i = 0; i < n; i++) {
-        if (t < p[i].at) {
-            t = p[i].at;
-            printf("       %d", t);
+    for (i = 1; i < t; i++) {
+        if (c[i].pid != c[i - 1].pid || strcmp(c[i].pname, "IDLE") == 0) {
+            printf("    %d", i);
         }
-        t += p[i].bt;
-        printf("    %d", t);
     }
-    printf("\n");
+    printf("    %d\n", t);
 }
 
 int main() {
-    fcfs p[100],c[100];
-    int n, i;
+    fcfs p[100], c[100];
+    int n, total_time, i;
     float avgtt = 0, avgwt = 0;
+
     printf("Enter the number of processes: ");
     scanf("%d", &n);
     printf("Enter details of processes\n");
     getprocess(p, n);
-    complete(p, n, c);
+
+    total_time = complete(p, n, c);
     tt(p, n);
     wt(p, n);
-    gantt(c, n);
+
+    gantt(c, total_time);
     print(p, n);
+
     for (i = 0; i < n; i++) {
         avgtt += p[i].tt;
         avgwt += p[i].wt;
     }
-    printf("Average Turn around time is: %f\n", (avgtt / n));
-    printf("Average Waiting time is: %f\n", (avgwt / n));
+
+    printf("Average Turnaround Time: %.2f\n", (avgtt / n));
+    printf("Average Waiting Time: %.2f\n", (avgwt / n));
+
     return 0;
 }
-
