@@ -1,0 +1,71 @@
+Accounts
+Account number
+aadhar
+acc type
+card 
+uuid
+balance
+branchid
+Date of opening
+
+Personal details
+Aadhar
+uid
+Name[mv]
+Fathers name
+DOB
+Gender
+Email
+address
+phone
+Income			
+Pan
+occupation
+
+
+Atm
+card
+type
+pin
+CVV
+
+passbook
+uuid
+account number
+statement
+IFSC
+CIF
+
+Online banking
+uuid
+uname
+pwd
+	
+
+
+branch
+branch id
+branch name
+branch adress
+branch manager
+branch email
+branch phone
+
+database - bank
+
+create table user(Aadhar number(12) Primary key,UID varchar(20) unique,First_name varchar(50) Not NUll ,last_name varchar(50) Not null, dob date Not null, Email varchar(20), Fathersname varchar(50), Phone varchar(12) Not null, gender varchar(20) Not Null, Pan varchar(12) Not Null, Income decimal(10,5) Not Null, Addr_city varchar(50) Not Null, Addr_post varchar(50) Not Null,Addr_District varchar(50) Not Null,Addr_State varchar(50) Not Null);
+
+create table bank(Bank_ID varchar(20) Primary Key, Bankname varchar(50) Not Null, Routing_number varchar(50) Unique);
+
+create table baranch(IFSC varchar(20) Primary Key, Name varchar(50) Not Null, Addr_post varchar(50) Not Null,Addr_District varchar(50) Not Null,Addr_State varchar(50) Not Null, phone varchar(12) Not Null);
+
+create table account(AccountNumber varchar(20) Primary Key, aadhar number(12) Foreign key refers aadhar(user), Card varchar(20) UNIQUE , Type varchar(10) NOT NULL, uuid varchar(20) NOT NULL, balance decimal(30,5) NOT NULL);
+
+create table passbook(AccountNumber varchar(20) Foreign Key refers AccountNumber(Account),UUID Foreign Key refers UID(user),IFSC Foreign key refers IFSC(Branch),statement_entry //datastruct NOT NULL, balance decimal(30,5));
+
+create table online(UserID varchar(30) PRIMARY KEY, UUID varchar(20) Foreignkey refers UID(user),  username varchar(40) UNIQUE, password varchar(40) NOT NULL);
+
+create table CARD(Cardnumber varchar(20) Primary Key, Account number varchar(20) ForeignKey refers AccountNumber(Account),Type varchar(20) NOT NULL,PIN Number(4) NOT NULL, CVV Number(3) NOT NULL)
+create table Loan(LoanID varchar(20) Primary Key, Account number varchar(20) ForeignKey refers AccountNumber(Account),Type varchar(20) NOT NULL,Remaining Date(4) NOT NULL, Intrest Decimal(3,2) NOT NULL)
+
+
