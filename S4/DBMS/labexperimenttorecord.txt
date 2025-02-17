@@ -1,0 +1,58 @@
+EXP1
+ER1 &2 in git
+remove qs for Schema
+
+EXP2
+Rename just put syntax no ss
+
+EXP3-4 
+done
+
+Exp 5
+create table Employees(emp_id int PRIMARY KEY,emp_name varchar(50),e_city varchar(20), e_street varchar(10), manager_id int, comp_id int, Foreign key (manager_id) REFERENCES managers(manager_id),Foreign key (comp_id) References Companies (comp_id) );
+
+create table Employees(emp_id int PRIMARY KEY,emp_name varchar(50),e_city varchar(20), e_street varchar(10), manager_id int, comp_id int, Foreign key (manager_id) REFERENCES Managers(mang_id),Foreign key
+ (comp_id) References Companies (comp_id) );
+	
+
+create table Companies(comp_id int PRIMARY KEY, comp_name varchar(50), comp_addr varchar(20));
+Query OK, 0 rows affected (0.03 sec)
+
+create table Managers(mang_id int PRIMARY KEY, mang_name varchar(50), mang_addr varchar(20));
+
+insert into Companies values(1,"SBI","ERNAKULAM");
+
+mysql> insert into Managers values(1,"Aadhya","St205");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into Managers values(1,"Athulya","St207");
+
+mysql> insert into Employees values(2,"Vishal","ERNAKULAM","St206",1,1);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Employees values(,"Vishal","ERNAKULAM","St206",1,1);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',"Vishal","ERNAKULAM","St206",1,1)' at line 1
+mysql> insert into Employees values(3,"NEHA","ERNAKULAM","St207",2,1);
+Query OK, 1 row affected (0.02 sec)
+	
+
+mysql> insert into Employees values(1,"Aryan","ERNAKULAM","St205",1,1);
+Query OK, 1 row affected (0.01 sec)
+
+SELECT emp_name FROM Employees INNER JOIN Companies ON Employees.comp_id = Companies.comp_id WHERE Companies.comp_name = 'SBI';
+
+SELECT emp_name FROM Employees INNER JOIN Companies ON Employees.comp_id = Companies.comp_id WHERE Companies.comp_addr = Employees.e_city;
+
+SELECT emp_name,mang_name  FROM Employees INNER JOIN Managers  ON Employees.manager_id = Managers.mang_id WHERE Managers.mang_addr = Employees.e_street;
+	
+SELECT companies.comp_name,sum(salary),min(salary) FROM Employees INNER JOIN Companies ON Employees.comp_id = Companies.comp_id WHERE Companies.comp_name = 'SBI';
+
+SELECT Companies.comp_name,sum(salary),min(salary) FROM Employees INNER JOIN Companies ON Employees.comp_id = Companies.comp_id WHERE Companies.comp_name = 'SBI';
+
+
+ SELECT Companies.comp_name,sum(salary),min(salary) FROM Employees INNER JOIN Companies ON Employees.comp_id = Companies.comp_id;
+ 
+SELECT Companies.comp_name,count(emp_id) FROM Employees INNER JOIN Companies ON Employees.comp_id = Companies.comp_id;
+
+
+
