@@ -1,0 +1,174 @@
+	exp 6 
+	1. select name from employee where name like 'a%';
+	mysql> select * from employee where name like 'a%';
+	+-----------------+
+	| name            |
+	+-----------------+
+	| Alexander Allen |
+	| Amelia Green    |
+	+-----------------+
+	2 rows in set (0.00 sec)
+
+	2. mysql> select * from employee where name like 'a%';
+	+-----------------+
+	| name            |
+	+-----------------+
+	| Alexander Allen |
+	| Amelia Green    |
+	+-----------------+
+	2 rows in set (0.00 sec)
+
+	3.mysql> select * from employee where salary>15000 AND 30000;
+	+-------+-----------------+----------+--------------------------------+-------------------+
+	| empno | name            | salary   | jobtitles                      | organization      |
+	+-------+-----------------+----------+--------------------------------+-------------------+
+	|     1 | John Doe        | 55000.00 | Software Engineer              | Tech Corp         |
+	|     2 | Jane Smith      | 65000.00 | Data Scientist                 | Data Labs         |
+	|     3 | Sarah Johnson   | 48000.00 | Product Manager                | Product Co        |
+	|     4 | Michael Brown   | 72000.00 | Software Architect             | Tech Solutions    |
+	|     5 | Emily Davis     | 50000.00 | QA Engineer                    | Innovatech        |
+	|     6 | William Harris  | 61000.00 | UI/UX Designer                 | Creative Studio   |
+	|     7 | Olivia Martinez | 73000.00 | DevOps Engineer                | CloudTech         |
+	|     8 | James Wilson    | 53000.00 | Marketing Manager              | Brand X           |
+	|     9 | Isabella Lee    | 65000.00 | Business Analyst               | Finance Hub       |
+	|    10 | Benjamin Clark  | 69000.00 | Full Stack Developer           | Web Solutions     |
+	|    11 | Sophia Lewis    | 58000.00 | Sales Representative           | Sales Co          |
+	|    12 | Ethan Young     | 72000.00 | Project Manager                | Build It Inc      |
+	|    13 | Mia Walker      | 60000.00 | Customer Support Lead          | Support Pro       |
+	|    14 | Alexander Allen | 78000.00 | Security Engineer              | SecureTech        |
+	|    15 | Charlotte King  | 67000.00 | HR Manager                     | PeopleWorks       |
+	|    16 | Jackson Scott   | 54000.00 | System Administrator           | IT Solutions      |
+	|    17 | Amelia Green    | 56000.00 | Database Administrator         | DataTech          |
+	|    18 | Lucas Adams     | 64000.00 | Software Developer             | App Makers        |
+	|    19 | Lily Baker      | 51000.00 | Business Development Executive | Growth Strategies |
+	|    20 | Henry Nelson    | 75000.00 | Network Engineer               | CommTech          |
+	+-------+-----------------+----------+--------------------------------+-------------------+
+	20 rows in set (0.00 sec)
+
+	4. mysql> select AVG(salary) from employee;
+	+--------------+
+	| AVG(salary)  |
+	+--------------+
+	| 62300.000000 |
+	+--------------+
+	1 row in set (0.00 sec)
+
+	mysql> select SUM(salary) from employee;
+	+-------------+
+	| SUM(salary) |
+	+-------------+
+	|  1246000.00 |
+	+-------------+
+	1 row in set (0.00 sec)
+
+
+
+
+
+	5.mysql> select count(empno) from employee;
+	+--------------+
+	| count(empno) |
+	+--------------+
+	|           20 |
+	+--------------+
+	1 row in set (0.00 sec)
+
+	6.
+	mysql> select max(salary) as MAX_SALARY, MIN(salary) as MIN_SALARY from employee;
+	+------------+------------+
+	| MAX_SALARY | MIN_SALARY |
+	+------------+------------+
+	|   78000.00 |   48000.00 |
+	+------------+------------+
+	1 row in set (0.00 sec)
+
+	7.
+	SQL> select MONTHS_BETWEEN('01-Jun-10' , '01-Aug-10') from dual;
+
+	MONTHS_BETWEEN('01-JUN-10','01-AUG-10')
+	---------------------------------------
+					     -2
+	run in sqlplus
+
+	8.
+	SQL> select LAST_DAY('01-Oct-09') from dual;
+
+
+	LAST_DAY
+	--------
+	31-10-09
+
+	9.mysql> select count(jobtitles) from employee;
+	+------------------+
+	| count(jobtitles) |
+	+------------------+
+	|               20 |
+	+------------------+
+	1 row in set (0.01 sec)
+
+	mysql> SELECT  MAX(salary) - MIN(salary) AS salary_difference FROM employee;
+	+-------------------+
+	| salary_difference |
+	+-------------------+
+	|          30000.00 |
+	+-------------------+
+	1 row in set (0.00 sec)
+
+
+	EXP 7. 
+
+	1. mysql> select count(empno) from employee;
+	+--------------+
+	| count(empno) |
+	+--------------+
+	|           20 |
+	+--------------+
+	1 row in set (0.00 sec)
+
+	2.mysql> select avg(salary) from employee;
+	+--------------+
+	| avg(salary)  |
+	+--------------+
+	| 62300.000000 |
+	+--------------+
+	1 row in set (0.00 sec)
+
+	3.mysql> select MAX(salary) from employee;
+	+-------------+
+	| MAX(salary) |
+	+-------------+
+	|    78000.00 |
+	+-------------+
+	1 row in set (0.00 sec)
+
+	4.mysql> select jobtitles,count(empno) from employee Group by jobtitles;
+	+--------------------------------+--------------+
+	| jobtitles                      | count(empno) |
+	+--------------------------------+--------------+
+	| Software Engineer              |            1 |
+	| Data Scientist                 |            1 |
+	| Product Manager                |            1 |
+	| Software Architect             |            1 |
+	| QA Engineer                    |            1 |
+	| UI/UX Designer                 |            1 |
+	| DevOps Engineer                |            1 |
+	| Marketing Manager              |            1 |
+	| Business Analyst               |            1 |
+	| Full Stack Developer           |            1 |
+	| Sales Representative           |            1 |
+	| Project Manager                |            1 |
+	| Customer Support Lead          |            1 |
+	| Security Engineer              |            1 |
+	| HR Manager                     |            1 |
+	| System Administrator           |            1 |
+	| Database Administrator         |            1 |
+	| Software Developer             |            1 |
+	| Business Development Executive |            1 |
+	| Network Engineer               |            1 |
+	+--------------------------------+--------------+
+	20 rows in set (0.00 sec)
+
+	5.
+
+
+
