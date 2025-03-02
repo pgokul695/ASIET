@@ -44,37 +44,55 @@ void wt(fcfs p[100], int n) {
 }
 
 int complete(fcfs p[100], int n, fcfs c[100], int tq) {
-    int i, t = 0, comp = 0, ind = 0;
-    int remaining = n; 
+    int q[100];    
+    int f = 0, r = 0;
+    int t = 0, comp = 0;
+    int visited[100] = {0};
+
+    for (int i = 0; i < n; i++) {
+        if (p[i].at == 0) {
+            q[r++] = i;
+            visited[i] = 1;
+        }
+    }
 
     while (comp < n) {
-        int executed = 0;
-        
-        for (i = 0; i < n; i++) {
-            if (p[i].at <= t && p[i].rt > 0) {
-                executed = 1;
-                if (p[i].rt > tq) {
-                    c[t] = p[i];
-                    p[i].rt -= tq;
-                    t += tq;
-                } else {
-                    c[t] = p[i];
-                    t += p[i].rt;
-                    p[i].rt = 0;
-                    p[i].ct = t;
-                    comp++;
-                }
+        if (f == r) { 
+            strcpy(c[t].pname, "IDLE");
+            c[t].pid = -1;
+            t++;
+            continue;
+        }
+
+        int i = q[f++];
+        int exec_time;
+
+        if (p[i].rt > tq) {
+            exec_time = tq;
+        } else {
+            exec_time = p[i].rt;
+        }
+
+        c[t] = p[i];
+        t += exec_time;
+        p[i].rt -= exec_time;
+
+        for (int j = 0; j < n; j++) {
+            if (visited[j] == 0 && p[j].at <= t) {
+                q[r++] = j;
+                visited[j] = 1;
             }
         }
 
-        if (!executed) {
-            strcpy(c[t].pname, "IDLE");
-            t++;
+        if (p[i].rt > 0) {
+            q[r++] = i;
+        } else {
+            p[i].ct = t;
+            comp++;
         }
     }
     return t;
 }
-
 
 void print(fcfs p[100], int n) {
     int i;
