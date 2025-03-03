@@ -68,4 +68,89 @@ create table online(UserID varchar(30) PRIMARY KEY, UUID varchar(20) Foreignkey 
 create table CARD(Cardnumber varchar(20) Primary Key, Account number varchar(20) ForeignKey refers AccountNumber(Account),Type varchar(20) NOT NULL,PIN Number(4) NOT NULL, CVV Number(3) NOT NULL)
 create table Loan(LoanID varchar(20) Primary Key, Account number varchar(20) ForeignKey refers AccountNumber(Account),Type varchar(20) NOT NULL,Remaining Date(4) NOT NULL, Intrest Decimal(3,2) NOT NULL)
 
+CREATE TABLE User (
+    user_id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    phone VARCHAR(15),
+    email VARCHAR(100) UNIQUE,
+    address VARCHAR(255),
+    role ENUM('Customer', 'Employee', 'Admin') NOT NULL
+);
+
+CREATE TABLE Bank (
+    bank_id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    headquarters_address VARCHAR(255)
+);
+
+CREATE TABLE Branch (
+    branch_id INT PRIMARY KEY AUTO_INCREMENT,
+    bank_id INT,
+    branch_name VARCHAR(100) NOT NULL,
+    branch_address VARCHAR(255),
+    FOREIGN KEY (bank_id) REFERENCES Bank(bank_id)
+);
+
+CREATE TABLE Account (
+    account_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT,
+    branch_id INT,
+    account_type VARCHAR(50) NOT NULL,
+    balance DECIMAL(10, 2) DEFAULT 0.00,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES User(user_id),
+    FOREIGN KEY (branch_id) REFERENCES Branch(branch_id)
+);
+
+CREATE TABLE Transaction (
+    transaction_id INT PRIMARY KEY AUTO_INCREMENT,
+    account_id INT,
+    type ENUM('deposit', 'withdraw', 'transfer') NOT NULL,
+    amount DECIMAL(10, 2) NOT NULL,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (account_id) REFERENCES Account(account_id)
+);
+
+CREATE TABLE Passbook (
+    passbook_id INT PRIMARY KEY AUTO_INCREMENT,
+    account_id INT,
+    transaction_id INT,
+    balance_after_transaction DECIMAL(10, 2),
+    FOREIGN KEY (account_id) REFERENCES Account(account_id),
+    FOREIGN KEY (transaction_id) REFERENCES Transaction(transaction_id)
+);
+
+CREATE TABLE Loan (
+    loan_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT,
+    branch_id INT,
+    loan_type VARCHAR(50) NOT NULL,
+    amount DECIMAL(10, 2) NOT NULL,
+    interest_rate DECIMAL(5, 2),
+    start_date DATE,
+    end_date DATE,
+    FOREIGN KEY (user_id) REFERENCES User(user_id),
+    FOREIGN KEY (branch_id) REFERENCES Branch(branch_id)
+);
+
+CREATE TABLE Card (
+    card_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT,
+    account_id INT,
+    card_type ENUM('Debit', 'Credit') NOT NULL,
+    card_number VARCHAR(16) UNIQUE NOT NULL,
+    expiry_date DATE,
+    FOREIGN KEY (user_id) REFERENCES User(user_id),
+    FOREIGN KEY (account_id) REFERENCES Account(account_id)
+);
+
+CREATE TABLE Online_Banking (
+    online_banking_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT,
+    username VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    last_login TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES User(user_id)
+);
+
 
