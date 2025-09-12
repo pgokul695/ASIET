@@ -6,7 +6,7 @@ set -euo pipefail
 trap 'echo "[!] Error on line $LINENO. Exiting."; exit 1' ERR
 
 # Change this to the IP address of your Nginx reverse proxy
-REVERSE_PROXY_IP="192.168.1.100"
+REVERSE_PROXY_IP="10.0.9.132"
 
 # Define your CTF domains (all mapped to REVERSE_PROXY_IP)
 HOST_ENTRIES=(
