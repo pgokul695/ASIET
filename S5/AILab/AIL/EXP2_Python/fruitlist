@@ -1,0 +1,4 @@
+ls=["Apple","Banana","Orange","Watermelon","Cherry"]
+for fruit in ls:
+	print(fruit, end=", ")
+print()
