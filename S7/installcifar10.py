@@ -1,7 +1,8 @@
-import tensorflow as tf
-from keras.src.utils import data_utils
 
-original_get_file = data_utils.get_file
+import tensorflow as tf
+import keras.src.datasets.cifar10 as cifar10
+
+original_get_file = cifar10.get_file
 
 def patched_get_file(fname, origin, *args, **kwargs):
     if "cifar-10-python.tar.gz" in origin:
@@ -11,9 +12,9 @@ def patched_get_file(fname, origin, *args, **kwargs):
         )
     return original_get_file(fname, origin, *args, **kwargs)
 
-data_utils.get_file = patched_get_file
+cifar10.get_file = patched_get_file
 
-# Original API remains unchanged
+# Original API, unchanged
 (x_train, y_train), (x_test, y_test) = (
     tf.keras.datasets.cifar10.load_data()
 )
